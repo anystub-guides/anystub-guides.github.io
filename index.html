@@ -50,7 +50,11 @@
     <div class="container">
         <h2> How to cook it</h2>
         <p>Out of box anyStub supports stubbing http and jdbc connections. To stub your connection you need to wrap
-            your connection with a wrapper and let it work. Beside with that you have some options to customize stubs.
+            your connection with a wrapper and let it work. For stubbin http connection use <code>org.anystub.http.StubHttpClient</code>, 
+            for jdbc dataSources <code>org.anystub.jdbc.StubDataSource</code>. In real project you reraly create the objects. More likely you have to 
+            create/configure a builder or factory which will create the connections or even spring-boot will create everyting for you. 
+            Examples below demonstrate how to stub real connections in the cases.
+            
         </p>
 
         <ul>
