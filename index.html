@@ -23,7 +23,7 @@
         </div>
     </div>
     <p class="d-flex">
-        <img class="mx-auto" alt="anyStub" src="https://github.com/anystub-guides/anystub-guides.github.io/raw/master/img/logo.png"/>
+        <img class="mx-auto" alt="anyStub: have a rest from writing mocks" src="https://github.com/anystub-guides/anystub-guides.github.io/raw/master/img/logo.png"/>
     </p>
 
     <div class="container">
@@ -102,6 +102,29 @@
     </div>
      <div class="container">
         <h2> Become a cheef</h2>
+    <p>In examples above, the stub files were created with <code>RequestMode.rmNew</code> attribute we didn't specify any. That means all calls will be assessed against the stub files. 
+        In case of the call is found in the file the result will be recovered from file and the hit of the real system will be procrasinated (or maybe omitted if not required).
+        Duplicates of the calls do not appear in the stub-file.
+        If anystub failed to match the call it will call the target system, keep the call id and results in the stub and recover the result for the caller.
+         </p>
+         <p>
+         AnyStub provides few more modes to proceed calls:
+         </p>
+         <ul>
+             <li><code>RequestMode.rmNone</code>
+                 Sending requests to a real system is forbidden. If request is not found in a stub-file then exception is thrown
+                 </li>
+             <li><code>RequestMode.rmTrack</code>
+                 If the stub file just created all requests are recorderd in the stub file (even if duplicated exists). If the stub-file exists 
+                 sending requests to a real system is forbidden. Calls are expected exactly in the same order as it was on a record phase.
+                 </li>
+             <li><code>RequestMode.rmAll</code>
+                 The Stub file clear on the first call. All requests are sent to a real system and results written to 
+                 </li>
+             <li><code>RequestMode.rmPassThrough</code>
+                 </li>
+         </ul>
+         
          
     </div>
 </div>
