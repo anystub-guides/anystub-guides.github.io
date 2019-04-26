@@ -1,1 +1,81 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>anyStub site</title>
+    <meta name="keywords"
+          content="java, kotlin, stubbing, mocking, mock, mock objects, testing, tdd, unit tests, integration tests, zero effort testing, resilient tests, test automation">
+    <meta name="description"
+          content="A landing page for information about anystub library, a stubbing library for integration tests written in Java.">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="uno.css">
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+<div>
+    <h3>Zero efforts stubbing for your integration tests in Java</h3>
+
+    <p>
+        <img alt="anyStub" src="https://github.com/anystub-guides/anystub-guides.github.io/blob/master/img/logo.png"/>
+    </p>
+
+    <div class="container">
+
+        <h2>Why do you need it</h2>
+        <ul>
+            <li>
+                make your app independent from external data sources
+            </li>
+            <li>
+                test classes, subsystems or the whole app against real data
+            </li>
+            <li>
+                zero efforts to collect test data
+            </li>
+            <li>
+                make your tests autonomous and running at any isolated build server
+            </li>
+        </ul>
+        <p> anyStub provides simple API and requires minimum code overhead to get benefits.</p>
+    </div>
+
+
+    <div class="container">
+        <h2> How to cook it</h2>
+        <p>Out of box anyStub supports stubbing http and jdbc connections. To stub your connection you need to wrap
+            your connection with a wrapper and let it work. Beside with that you have some options to customize stubs.
+        </p>
+
+        <ul>
+            <li>
+                here is <a href="https://github.com/anystub-guides/gs-relational-data-access/commit/1724f93e61963ba4af2a8fdea7f7372fba6e3ed1#diff-0af5c5417079e9c845c27e8102b06188R1">an example</a>
+                how to cover <a href="https://spring.io/guides/gs/relational-data-access/">Accessing
+                Relational Data using JDBC with Spring</a> from
+                spring-boot guides with integration tests.
+            </li>
+            <li>
+                here is <a href="https://github.com/anystub-guides/gs-consuming-rest/commit/0dd943f6495e87684f3392387b9a5a5e2a846263">an example</a>
+                how to stub http connections in tests <a href="https://spring.io/guides/gs/consuming-rest/">Consuming a RESTful Web Service</a> from
+                spring-boot guides with integration tests.
+            </li>
+        </ul>
+
+        <p>
+            anyStub library is developed for spring-boot applications to stub external communication although you can
+            setup correspondent bean for standard spring application with configuration in .xml files.
+        </p>
+        <p>
+
+            You can stub any communication between objects in your plain-java application. Here is <a href="https://github.com/anystub/anystub/blob/anystub-0.2.22/src/test/java/org/anystub/it/WorkerEasyTest.java">an example</a>
+            how to extend your class's method <code>get()</code> to make it stubbing method.
+        </p>
+    </div>
+</div>
+</body>
+</html>
