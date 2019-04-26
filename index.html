@@ -50,16 +50,16 @@
     <div class="container">
         <h2> How to cook it</h2>
         <p>Out of box anyStub supports stubbing http and jdbc connections. To stub your connection you need to wrap
-            your connection with a wrapper and let it work. For stubbin http connection use <code>org.anystub.http.StubHttpClient</code>, 
-            for jdbc dataSources <code>org.anystub.jdbc.StubDataSource</code>. In real project you reraly create the objects. More likely you have to 
-            create/configure a builder or factory which will create the connections or even spring-boot will create everyting for you. 
+            your connection with a wrapper and let it work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>, 
+            for jdbc dataSources <code>org.anystub.jdbc.StubDataSource</code>. In real a project, you rarely create the objects. More likely you have to 
+            create/configure a builder or a factory which will create the connections or even spring-boot will create everything for you. 
             Examples below demonstrate how to stub real connections in the cases.
             
         </p>
         
         <p> Once you stub the connections all external calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
-            Sometimes you need to split the calls in different stub-files. You can utilize <code>@AnystubId</code> annotation. It's a class/method level annotation.
-            You can put it with your test class/test method to route all calls under the annotation in a distinct file. By default the file has a name  of
+            Sometimes you need to split the calls by different stub-files. You can utilize <code>@AnystubId</code> annotation. It's a class/method level annotation.
+            You can put it with your test class/test method to route all calls under the annotation in a distinct file. By default, the file has a name of
             <code>TestClassName.yml/TestMethodName.yml</code> and puts in src/test/resources/anystub/. The annotation has a parameter "filename" to 
                 give the file a specific name. The extension '.yml' will be added automatically
         </p>
@@ -67,25 +67,25 @@
         <ul>
             <li>
                 here is <a href="https://github.com/anystub-guides/gs-relational-data-access/commit/1724f93e61963ba4af2a8fdea7f7372fba6e3ed1#diff-0af5c5417079e9c845c27e8102b06188R1">an example</a>
-                how to cover <a href="https://spring.io/guides/gs/relational-data-access/">Accessing
+                of how to cover <a href="https://spring.io/guides/gs/relational-data-access/">Accessing
                 Relational Data using JDBC with Spring</a> from
                 spring-boot guides with integration tests.
             </li>
             <li>
                 here is <a href="https://github.com/anystub-guides/gs-consuming-rest/commit/0dd943f6495e87684f3392387b9a5a5e2a846263">an example</a>
-                how to stub http connections in tests <a href="https://spring.io/guides/gs/consuming-rest/">Consuming a RESTful Web Service</a> from
+                of how to stub http connections in tests <a href="https://spring.io/guides/gs/consuming-rest/">Consuming a RESTful Web Service</a> from
                 spring-boot guides with integration tests.
             </li>
         </ul>
 
         <p>
-            anyStub library is developed for spring-boot applications to stub external communication although you can
-            setup correspondent bean for standard spring application with configuration in .xml files.
+            AnyStub library is developed for spring-boot applications to stub external communication although you can
+            setup correspondent bean for standard spring application with a configuration in .xml files.
         </p>
         <p>
 
             You can stub any communication between objects in your plain-java application. Here is <a href="https://github.com/anystub/anystub/blob/anystub-0.2.22/src/test/java/org/anystub/it/WorkerEasyTest.java">an example</a>
-            how to extend your class's method <code>get()</code> to make it stubbing method.
+            of how to extend your class's method <code>get()</code> to make it stubbing method.
         </p>
         
         <h4> Remember </h4>
