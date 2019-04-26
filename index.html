@@ -117,11 +117,13 @@
              <li><code>RequestMode.rmTrack</code>
                  If the stub file just created all requests are recorderd in the stub file (even if duplicated exists). If the stub-file exists 
                  sending requests to a real system is forbidden. Calls are expected exactly in the same order as it was on a record phase.
+                 If next call doesn't match records in the stub-file the exception thrown.
                  </li>
              <li><code>RequestMode.rmAll</code>
-                 The Stub file clear on the first call. All requests are sent to a real system and results written to 
+                 The Stub file clear on the first call. All requests are sent to a real system and results written to the stub-file. Duplicated are possible.
                  </li>
              <li><code>RequestMode.rmPassThrough</code>
+                 all calls go directly to a real system.
                  </li>
          </ul>
          
