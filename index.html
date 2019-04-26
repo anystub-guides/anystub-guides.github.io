@@ -56,6 +56,13 @@
             Examples below demonstrate how to stub real connections in the cases.
             
         </p>
+        
+        <p> Once you stub the connections all external calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
+            Sometimes you need to split the calls in different stub-files. You can utilize <code>@AnystubId</code> annotation. It's a class/method level annotation.
+            You can put it with your test class/test method to route all calls under the annotation in a distinct file. By default the file has a name  of
+            <code><TestClassName>.yml/<TestMethodName>.yml</code> and puts in src/test/resources/anystub. The annotation has a parameter "filename" to 
+                give the file specific name. The extension '.yml' will be added automatically
+        </p>
 
         <ul>
             <li>
