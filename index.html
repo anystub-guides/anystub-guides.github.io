@@ -35,6 +35,30 @@
     </p>
 
     <div class="container">
+        <div class="container">
+            <h2>What's that</h2>
+            <p>
+                Anystub wraps function calls and attempts to find a matching calls that has already been made and recorded.
+                Two things can then happen:
+            </p>
+            <ul>
+                <li>
+                    If there is a matching call, Anystub will recover the result that is associated with call and return.
+                </li>
+                <li>
+                    If there is not a matching call and it is allowed to make the real call, Anystub will make the call,
+                    record the result and return it.
+                </li>
+            </ul>
+            <p>
+                Recorded calls and corresponding results are stored in files called stub-files.
+            </p>
+            <p>
+                Out of box anyStub includes wrappers for <code>org.apache.http.client.HttpClient</code> from Apache
+                HttpClient 4.5.8
+                to stub http connections and some interfaces from <code>javax.sql.*</code> to stub DB-connections.
+            </p>
+        </div>
 
         <h2>Why do you need it</h2>
         <ul>
@@ -51,30 +75,31 @@
                 make your tests autonomous and running at any isolated build server
             </li>
         </ul>
-        <p> anyStub provides simple API and requires minimum code overhead to get benefits.</p>
+        <p> anyStub provides simple API and requires minimum overhead code to get benefits.</p>
     </div>
 
 
     <div class="container">
         <h2> How to cook it</h2>
-        <p>Out of box anyStub supports stubbing http and jdbc connections. To stub your connection you need to wrap
-            your connection with a wrapper and let it work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>,
-            for jdbc dataSources <code>org.anystub.jdbc.StubDataSource</code>. In real a project, you rarely create the
-            objects. More likely you have to
-            create/configure a builder or a factory which will create the connections or even spring-boot will create
-            everything for you.
+        <p>As you have wrappers you for http and db communications need to inject the objects properly in your
+            application
+            and let it to work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>. The main
+            class for stubbing database calls is <code>org.anystub.jdbc.StubDataSource</code>. To wrap the real objects
+            use <code>stub(HttpClient httpClient)</code>, <code>stub(DataSource dataSource)</code> static functions of
+            the classes. You only need to pass an object configured for real communication.
+            More likely have to create/configure a builder or a factory which will create the stubbed connections.
             Examples below demonstrate how to stub real connections in the cases.
 
         </p>
 
-        <p> Once you stub the connections all external calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
-            Sometimes you need to split the calls by different stub-files. You can utilize <code>@AnystubId</code>
+        <p> Once you stub the connections and run tests all calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
+            Sometimes you need to split the calls by different stub-files. To do that you can utilize <code>@AnystubId</code>
             annotation. It's a class/method level annotation.
-            You can put it with your test class/test method to route all calls under the annotation in a distinct file.
+            You can put it with your test class/test method to direct saving all calls under the annotation in a distinct file.
             By default, the file has a name of
             <code>TestClassName.yml/TestMethodName.yml</code> and puts in src/test/resources/anystub/. The annotation
             has a parameter "filename" to
-            give the file a specific name. The extension '.yml' will be added automatically
+            give the file a specific name. The extension '.yml' will be added automatically.
         </p>
 
         <ul>
@@ -83,7 +108,7 @@
                     href="https://github.com/anystub-guides/gs-relational-data-access/commit/1724f93e61963ba4af2a8fdea7f7372fba6e3ed1#diff-0af5c5417079e9c845c27e8102b06188R1">an
                 example</a>
                 of how to cover <a href="https://spring.io/guides/gs/relational-data-access/">Accessing
-                Relational Data using JDBC with Spring</a> from
+                Relational Data using JDBC with Spring</a> application from
                 spring-boot guides with integration tests.
             </li>
             <li>
@@ -97,34 +122,39 @@
         </ul>
 
         <p>
-            AnyStub library is developed for spring-boot applications to stub external communication although you can
-            setup correspondent bean for standard spring application with a configuration in .xml files.
+            AnyStub library is developed for spring-boot applications to stub external communication.
+            In the examples you run the same full spring container. The only difference is a bean wrapped by class from
+            anyStun library.
+
+            If you run spring container in tests in a application with a configuration in .xml files you can also
+            consider injecting the classes.
+
         </p>
         <p>
-            You can stub any communication between objects in your plain-java application. Here is <a
+            You can stub any call in your plain-java application. Here is <a
                 href="https://github.com/anystub/anystub/blob/anystub-0.2.22/src/test/java/org/anystub/it/WorkerEasyTest.java">an
-            example</a>
-            of how to extend your class's method <code>get()</code> to make it stubbed method.
+            example</a> of how to create a wrapper for a method <code>get()</code> of plain java class.
         </p>
 
         <h4> Remember </h4>
         <ul>
             <li>Stubbing inconsistent systems, unstable components and timely available resources is a good idea</li>
-            <li>Stubbing low level objects which works behind several levels of abstractions will increase coverage</li>
+            <li>Stubbing low level objects which works behind several levels of abstractions helps to create
+                resilient integration tests and increases coverage</li>
             <li>Split and reuse your stubs among tests wisely</li>
-
+            <li>Change or mock behavior of your system less - Try to find suitable data to test all aspects</li>
+            <li>You can populate and modify your stub-files to prove your system works</li>
         </ul>
     </div>
     <div class="container">
         <h2> Become a chief</h2>
-        <p>In examples above, the stub files were created with <code>RequestMode.rmNew</code> attribute we didn't
-            specify any. That means all calls will be assessed against the stub files.
+        <p>In examples above, the stub files were created as by default with <code>RequestMode.rmNew</code> attribute.
+            That means all calls will be assessed against the stub files.
             In case of the call is found in the file the result will be recovered from file and the hit of the real
-            system will be procrastinated (or maybe omitted at all if not required).
+            system will be procrastinated (or maybe omitted if not required).
             Duplicates of the calls do not appear in the stub-file.
-            If anyStub failed to match a call with stored calls it will call the target system, keep the call id and
-            results in the stub
-            and recover the result for the caller.
+            If AnyStub failed to find a call it will hit the target system, store the call id and
+            results in the stub and return the result to caller.
         </p>
         <p>
             AnyStub provides few more modes to proceed calls:
@@ -132,7 +162,7 @@
         <ul>
             <li><code>RequestMode.rmNone</code>
                 Sending requests to a real system is forbidden. If request is not found in a stub-file then exception is
-                thrown
+                thrown.
             </li>
             <li><code>RequestMode.rmTrack</code>
                 If the stub file just created all requests are recorded in the stub file (even if duplicated exists).
