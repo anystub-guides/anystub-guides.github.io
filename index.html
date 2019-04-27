@@ -81,19 +81,18 @@
 
     <div class="container">
         <h2> How to cook it</h2>
-        <p>As you have wrappers you for http and db communications need to inject the objects properly in your
+        <p>As you have wrappers for http and db communications you only need to properly inject the objects in your
             application
-            and let it to work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>. The main
+            and let it work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>. The main
             class for stubbing database calls is <code>org.anystub.jdbc.StubDataSource</code>. To wrap the real objects
             use <code>stub(HttpClient httpClient)</code>, <code>stub(DataSource dataSource)</code> static functions of
-            the classes. You only need to pass an object configured for real communication.
-            More likely have to create/configure a builder or a factory which will create the stubbed connections.
+            the classes. You still need to create a real httpClient/dataSource and pass it to the library.
+            More likely you have to create/configure a builder or a factory which will create the stubbed connections.
             Examples below demonstrate how to stub real connections in the cases.
-
         </p>
 
         <p> Once you stub the connections and run tests all calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
-            Sometimes you need to split the calls by different stub-files. To do that you can utilize <code>@AnystubId</code>
+            Sometimes, you need to split the calls by different stub-files. To do that you can utilize <code>@AnystubId</code>
             annotation. It's a class/method level annotation.
             You can put it with your test class/test method to direct saving all calls under the annotation in a distinct file.
             By default, the file has a name of
