@@ -75,30 +75,28 @@
                 make your tests autonomous and running at any isolated build server
             </li>
         </ul>
-        <p> anyStub provides simple API and requires minimum overhead code to get benefits.</p>
+        <p> anyStub provides simple API and requires minimum overhead code to get the benefits.</p>
     </div>
 
 
     <div class="container">
         <h2> How to cook it</h2>
-        <p>As you have wrappers for http and db communications you only need to properly inject the objects in your
-            application
-            and let it work. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>. The main
-            class for stubbing database calls is <code>org.anystub.jdbc.StubDataSource</code>. To wrap the real objects
-            use <code>stub(HttpClient httpClient)</code>, <code>stub(DataSource dataSource)</code> static functions of
-            the classes. You still need to create a real httpClient/dataSource and pass it to the library.
-            More likely you have to create/configure a builder or a factory which will create the stubbed connections.
-            Examples below demonstrate how to stub real connections in the cases.
+        <p>Out of box Anystub supports Apache HttpClient and javax.sql.DataSource to record and replay requests.
+            To use it you need to inject wrappers properly. For stubbing http connection use <code>org.anystub.http.StubHttpClient</code>. The main
+            class for stubbing database calls is <code>org.anystub.jdbc.StubDataSource</code>. In tests you will create real connections and wrap them with 
+		provided implementations by passing them as a parameter in constructor.
+
+            
+            Examples below demonstrate how to stub connections in spring-boot tests.
         </p>
 
-        <p> Once you stub the connections and run tests all calls will appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
-            Sometimes, you need to split the calls by different stub-files. To do that you can utilize <code>@AnystubId</code>
-            annotation. It's a class/method level annotation.
+        <p> Once you stub the connections and run tests all calls begin to appear in a default-stub file <code>src/test/resources/anystub/stub.yml</code>
+            Sometimes, you need to split the calls by different stub-files. To do that you can utilize an annotation <code>@AnystubId</code>. You can apply it at class or method level in test files.
             You can put it with your test class/test method to direct saving all calls under the annotation in a distinct file.
-            By default, the file has a name of
-            <code>TestClassName.yml/TestMethodName.yml</code> and puts in src/test/resources/anystub/. The annotation
+            By default, the file has a name of the class or the method with .yml extention.
+            You will find the files in src/test/resources/anystub/. The annotation
             has a parameter "filename" to
-            give the file a specific name. The extension '.yml' will be added automatically.
+            give the file a specific name. The extension will be added automatically.
         </p>
 
         <ul>
